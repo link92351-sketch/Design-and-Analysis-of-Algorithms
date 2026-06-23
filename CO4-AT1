@@ -1,4 +1,5 @@
-(1)
+name:linkesh kumar (192524492)
+(1)given a weighted graph find the minimum tree using prim's algorithm
 def p_mst(m):  
     n=len(m)
     visit=[False]*n
