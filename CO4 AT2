@@ -1,0 +1,49 @@
+name:linkesh kumar (192524492)
+Q(1)Warehouse Delivery Route Optimization Using Greedy Strategy
+Answer:
+1. Graph Modeling & Algorithm
+Vertices ( V ): Delivery locations.
+Edges (E): Available routes between locations.
+Weights (W): The monetary cost to traverse each route.
+Target: Find the Minimum Spanning Tree (MST) to connect all points at the absolute lowest cost.
+Chosen Greedy Algorithm: Kruskal’s Algorithm (ideal for mapping out infrastructure networks efficiently).
+2. How the Greedy Strategy WorksSort: List all available routes and sort them in ascending order by cost (cheapest first).
+Select: Iterate through the sorted routes and pick the cheapest one available.
+Check (Cycle Avoidance): Using a Union-Find data structure, check if adding the route creates a loop. 
+If it connects two previously disconnected areas, keep it. If it forms a closed loop, discard it.
+Stop: Terminate as soon as V - 1 routes are chosen, successfully connecting every location.
+3. Time ComplexitySorting edges: O(E \log E)
+Disjoint-Set operations (Cycle detection): O(E . alpha(V))
+Total Complexity: O(E log V) (where E is the number of routes and V is the number of locations). 
+This is highly efficient and scales well.
+4. Pros & Cons of the Greedy Approach
+Advantages:
+Guaranteed Best Network Layout: Mathematically proven to find the global minimum cost layout for a connected network.
+Fast and Scalable: Executes rapidly even for large logistics networks with thousands of nodes.
+Limitations:
+Ignores Reality Constraints: Does not account for delivery deadlines, traffic conditions, or vehicle load capacities.
+Not a Single Continuous Tour: It creates a branching tree structure. 
+If a single truck needs to complete a round-trip loop visiting multiple stops (like a mail carrier), 
+this problem becomes the Traveling Salesperson Problem (TSP), where a simple greedy approach fails to find the best solution.
+
+Q(2)Manufacturing Resource Allocation Using Dynamic Programming
+answer:
+1. Optimization Problem FormulationLet x_i \in \{0, 1\} represent whether product i is selected (1) or not (0). To simplify, 
+we scale the budget and investments by dividing by 10,000 (Budget W = 10$).
+Objective Function: Maximize profit Z: text{Maximize } Z = 25x_1 + 40x_2 + 50x_3 + 65x_4 \quad (\text{in thousands})
+Constraint:2x_1 + 3x_2 + 4x_3 + 5x_4 \le 10 \quad (\text{Budget Constraint})
+2. Suitability of Dynamic ProgrammingOptimal Substructure: The optimal solution for a budget of Rs. 100,000 is built from optimal choices made for smaller sub-budgets.
+Overlapping Subproblems: Evaluating choices recursively causes redundant calculations of identical remaining budgets.
+DP avoids this by storing results in a table.
+  3. Recurrence RelationLet DP[i][w] be the max profit using up to item i with a scaled budget w : DP[i][w] = 
+\begin{cases} 
+DP[i-1][w] & \text{if } w_i > w 
+\max(DP[i-1][w], v_i + DP[i-1][w - w_i]) & \text{if } w_i \le w 
+\end{cases}
+4. Product Selection & Maximum ProfitBy filling out the 0/1 Knapsack decision
+matrix:Maximum Profit: Rs. 130,000 (Scaled value of 130)
+Optimal Product Selection: A, B, and D * Budget Verification: text{Rs. } 20,000 (A) + 30,000 (B) + 50,000 (D) = \text{Rs. } 100,000$ (Exactly hits the limit).
+5. Complexity AnalysisTime Complexity: mathcal{O}(N \times W) where N = 4$ products and W = 10 budget steps.
+It takes a constant 44 matrix operations.
+Space Complexity: mathcal{O}(N \times W) to store the table. 
+This can be optimized to \mathcal{O}(W) by storing only the previous array row.
